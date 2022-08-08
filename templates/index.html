@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<!--Discussion thread-->
+<div class="container-lg">
+    <h1 class="h1"> Companies </h1>
+    <div class="container">
+        <br>
+        <form action="/" method="POST">
+            <input type="text" placeholder="Company Name" name="name" required="true">
+            <input type="text" placeholder="Company Phone Number" name="phone" required="true">
+            <input type="text" placeholder="Company Email" name="email" required="true">
+            <input type="text" placeholder="Company Address" name="address" required="true">
+            <input type="submit" value="Create" class="btn btn-primary" >
+        </form>
+    </div> 
+</div>
+    {% for item in companies.query.all() %}
+
+    <div class="container text-center border border-dark">
+        <div class="row">
+            <div class="col">
+                <h2>{{ item.name }}</h2>
+            </div>
+            <div class="col">
+                <p>{{ item.phone }}</p>
+            </div>
+            <div class="col">
+                <p>{{ item.email }}</p>
+            </div>
+            <div class="col">
+                <p>{{ item.address }}</p>
+            </div>
+            <div class="col">
+                <a href="{{url_for('editEntry', pid=item.id)}}" class="btn btn-primary" role="button">Edit Post</a>
+            </div>
+            <div class="col">
+                <a href="{{url_for('deleteEntry', pid=item.id)}}" class="btn btn-danger" role="button">Delete Post</a>
+            </div>
+        </div>
+    </div> 
+    {% endfor %}   
+</div>
+
+{% endblock %}
